@@ -1,0 +1,112 @@
+
+<html>
+
+<head>
+
+
+	<title>Untitled 5</title>
+</head>
+
+<body text="brown">
+<form name="frm" action="" method="post">
+<table border="4" width="500" align="center" cellspacing="5" cellpadding="10">
+<caption>Table User INput</caption>
+<tr><th colspan="2">Registration page</th></tr>
+<tr><td>USER NAME </td><td><input type="text"name="nm" maxlength="5" required placeholder="Enter your name"/></td>
+<tr><td>Password </td><td><input type="password"name="pwd"/></td>
+<tr><td>EMAIL ID</td><td><input type="email"name="eid"/></td>
+<tr><td>DOB </td><td><input type="date"name="dt" min="1995-10-12" maxlength="2020-10-10"/></td>
+<tr><td>GENDER </td><td><input type="radio"name="r1" value="Male"/>Male<input type="radio"name="r1" value="FEMALE"/>Female<input type="radio"name="r1"/>Transgender</td>
+<input type="checkbox" name="ch[]" value="STUDIES" />STUDIES<input type="checkbox" name="ch[]" value="Music" />MUSIC
+
+<tr><td>CGPA</td><td><input type="number"name="CGPA" min="1" max="10"/></td>
+<tr><td>COLOR </td><td><input type="color"name="c"/></td>
+<tr><td>ADDRESS</td><td></input><textarea name="add" cols="50" rows="10"></textarea></textarea> </tr></td>
+<tr><td>QUALIFACTION</td><td><select name="qual">
+<option>B.TECH</option>
+<option>M.TECH</option>
+<option selected="">MBA</option>
+<option>BBA</option>
+</select></td></tr>
+<tr><td>UPLOAD IMAGE </td><td align="center"><input type="file"name="img"/></td>
+<tr><td>SUBMIT </td><td ><input type="submit"name="sub"/>
+<input type="reset"name="res"/>
+<input type="button"name="butt" value="ADMIN SUBMIT"/><input type="image" src="desk.jpg" height="50" width="50"name="img"/></td></tr>
+
+</table>
+</form>
+
+</body>
+</html>
+<?php
+if(isset($_REQUEST['sub']))
+{
+    echo "Enter choices";
+$Name= $_REQUEST['nm'];
+$PassWOrd= $_REQUEST['pwd'];
+$EMAIL_ID= $_REQUEST['eid'];
+$DOB= $_REQUEST['dt'];
+
+/*$hobbies=null;
+if(isset($_REQUEST['ch1']))
+{
+$hobbies.=  $_REQUEST['ch1'].",";
+}
+if(isset($_REQUEST['ch2']))
+{
+$hobbies.=  $_REQUEST['ch2'].",";
+}
+if(isset($_REQUEST['ch3']))
+{
+$hobbies.= $_REQUEST['ch3'].",";
+}
+if(isset($_REQUEST['ch4']))
+{
+$hobbies.= $_REQUEST['ch4'].",";
+}
+if(isset($_REQUEST['ch5']))
+{
+$hobbies.= $_REQUEST['ch5'].",";
+}
+echo hobbies;*/
+$link=mysqli_connect("localhost","root","","shrey");
+$qry="insert into tab_1 values('$Name','$PassWOrd','$EMAIL_ID','$DOB')";
+$res=mysqli_query($link,$qry);
+if($res)
+{
+echo "Record Inserted";
+}
+else
+    echo "Failed...";
+}
+
+if(isset($_REQUEST['r1']))
+{
+    
+ $_REQUEST['r1'].",";
+}
+$hobbies=null;
+/*
+if(isset($_REQUEST['ch1']))
+{
+$hobbies.=  $_REQUEST['ch1'].",";
+}
+if(isset($_REQUEST['ch2']))
+{
+$hobbies.=  $_REQUEST['ch2'].",";
+}
+if(isset($_REQUEST['ch3']))
+{
+$hobbies.= $_REQUEST['ch3'].",";
+}
+if(isset($_REQUEST['ch4']))
+{
+$hobbies.= $_REQUEST['ch4'].",";
+}
+if(isset($_REQUEST['ch5']))
+{
+$hobbies.= $_REQUEST['ch5'].",";
+}
+echo hobbies;*/
+?>
+
