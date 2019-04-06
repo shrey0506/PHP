@@ -1,0 +1,64 @@
+<?php
+$name=null;
+$pass=null;
+$email=null;
+//$uid=null;
+if(isset($_REQUEST['edit']))
+{
+    $name=$_REQUEST['select'];
+$link=mysqli_connect("localhost","root","","shrey");
+$qry="select u_name, user_pwd,email_id from tab_1 where u_name='$name'";
+$resultset=mysqli_query($link,$qry);
+while($r=mysqli_fetch_row($resultset))
+{
+    $name=$r[0];
+    $pass=$r[1];
+    $email=$r[2];
+    //$uid=$r[3];
+    
+}
+}
+if(isset($_REQUEST['upd']))
+{
+   $email=$_REQUEST['gmail']; 
+   $pass=$_REQUEST['pass'];
+    $link=mysqli_connect("localhost","root","","shrey");
+  
+    $qry="update tab_1 set user_pwd='$pass'  where email_id=$email ";
+    $resultset=mysqli_query($link,$qry);
+    
+   if($resultset)
+   {
+    
+    echo "record updated";
+   }
+}
+?>
+<html>
+<head><title></title></head>
+<body>
+<form method="post">
+<center><select name="select" >
+<option>--Select Name--</option><?php
+$link=mysqli_connect("localhost","root","","shrey");
+$qry="select u_name from tab_1";
+$resultset= mysqli_query($link,$qry);
+while($r=mysqli_fetch_row($resultset))
+{
+    
+    echo "<option> $r[0]</option>";
+}
+?></select>
+<input type="submit" name="edit" value="EDIT" />
+
+<table bgcolor="gray" border="4">
+<tr><td>Name</td><td><input type="text" name="nm" value="<?php echo $name ?>"readonly="" /></td></tr>
+<tr><td>password</td><td><input type="text" name="pass" value="<?php echo $pass?>" /></td></tr>
+<tr><td>Email</td><td><input type="email" name="gmail" value="<?php echo $email ?>" /></td></tr>
+
+<tr><td></td><td><center><input type="submit" name="upd" value="update" /></center></td></tr>
+</table>
+</center>
+</form>
+</body>
+</html>
