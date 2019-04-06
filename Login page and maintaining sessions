@@ -1,0 +1,64 @@
+<html>
+<head>
+<title></title></head>
+<body>
+<hr color='orange' size="10"/>
+<h1><center>Test Your Skills</center></h1>
+<hr color='green' size="10"/>
+<fieldset>
+
+<legend>Login</legend>
+<form name="frm" method="post" action="">
+<center>
+<table border="4">
+<tr>
+<td colspan="2" align="center">
+Login 
+
+</td>
+</tr>
+<tr><td>EMAIL</td><td><input type="email" name="mail" /></td></tr>
+<tr><td>Password</td><td><input type="password" name="pass" /></td></tr>
+<tr><td colspan="2" align="center"><input type="submit" name="sub" value="LOGIN" /></td></tr>
+</table>
+</fieldset>
+</form>
+</center>
+
+</body>
+
+</html>
+<?php
+session_start();
+if(isset($_REQUEST['sub']))
+{
+$uid=$_REQUEST['mail'];
+$pwd=$_REQUEST['pass'];
+
+
+    if(!empty($_REQUEST['mail']) and !empty($_REQUEST['pass']))
+    {
+        $link=mysqli_connect("localhost","root","","shrey");
+        $qry="select * from tab_1 where email_id='$uid' and user_pwd='$pwd' ";
+        $resultset=mysqli_query($link,$qry);
+        $row=mysqli_num_rows($resultset);//count number of rows in the database 
+        if($row){
+            $r=mysqli_fetch_row($resultset);
+            $_SESSION['Name']=$r[0];
+            $_SESSION['UID']=$r[11];
+            //var_dump($_SESSION);
+        //echo "Login sucesfull";//
+        header("location:session.php");
+        
+        }
+        else
+        {
+        echo "Login Id or password unmatched";
+    }
+    }
+    else{
+       echo " invalid Login Id or password unmatched";  
+    }
+}
+
+?>
